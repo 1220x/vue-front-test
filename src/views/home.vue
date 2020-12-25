@@ -9,7 +9,7 @@ export default {
     name: 'home',
     data() {
         return {
-            test: '主页----测试'
+            test: '主页--测试'
         }
     },
     methods: {
