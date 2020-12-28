@@ -76,10 +76,10 @@
                     <div>总耗时</div>
                     <div>实例状态</div>
                 </div>
-                <div id="data" class="data flex-row" style="background:#ffffff;
+                <div v-for="(item, index) in tableData.data" :key="index" id="data" class="data flex-row" style="background:#ffffff;
                 border-radius: 6px;justify-content: space-between;">
-                  <div v-text="content">
-
+                  <div class="test">
+                      {{ item.name }}
                   </div>
                 </div>
                 <div class="data flex-row" style="background:#F5F6FA ;
@@ -105,7 +105,8 @@ export default {
         name: "MissionOverview",
         data() {
             return {
-                content:"hell0"
+                content:"hell0",
+                tableData:[]
             }
         },
         mounted() {
@@ -117,6 +118,10 @@ export default {
                 axios.get('http://localhost:8080/static/test.json').then(response => {
                     
                     console.log(response.data);
+
+                    this.tableData = response.data;
+
+                    console.log(this.tableData.data);
 
                 }, response => {
                     console.log("error");
