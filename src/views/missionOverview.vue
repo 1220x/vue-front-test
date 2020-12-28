@@ -60,10 +60,10 @@
                 </div>
             </div>
             <div class="main-content">
-                <div>
-                    待办
+                <div style="margin-top: 25px;">
+                    待办已办
                 </div>
-                <div>
+                <div style="margin-top: 33px;margin-bottom: 24px;">
                     <button type="button">待办任务</button>
                     <button type="button">已办任务</button>
                 </div>
@@ -76,9 +76,11 @@
                     <div>总耗时</div>
                     <div>实例状态</div>
                 </div>
-                <div class="data flex-row" style="background:#ffffff;
+                <div id="data" class="data flex-row" style="background:#ffffff;
                 border-radius: 6px;justify-content: space-between;">
-                    
+                  <div v-text="content">
+
+                  </div>
                 </div>
                 <div class="data flex-row" style="background:#F5F6FA ;
                 border-radius: 6px;justify-content: space-between;">
@@ -98,20 +100,48 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-    name: 'MissionOverview',
-    data() {
-        return {
+        name: "MissionOverview",
+        data() {
+            return {
+                content:"hell0"
+            }
+        },
+        mounted() {
+            this.getData();
+        },
+        methods: {
+            getData() {
 
+                axios.get('http://localhost:8080/static/test.json').then(response => {
+                    
+                    console.log(response.data);
+
+                }, response => {
+                    console.log("error");
+                });
+            }
         }
     }
-}
-</script>rip>
 
-<style scoped>
+// export default {
+//     name: 'MissionOverview',
+//     data() {
+//         return {
+//             el : "#data",
+//             data : {
+
+//             }
+//         }
+//     }
+// }
+</script>
+<style>
 * {
     margin: 0;
     padding: 0;
+    /* width: 100%; */
 }
 
 body {
