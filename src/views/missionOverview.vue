@@ -1,7 +1,7 @@
 <template>
         <div class="flex-row">
         <div class="left-content" style="width: 206px;">
-            <div class="left-top">
+            <div class="left-top" style="margin-top:27px;font-family:PingFangSC-Medium;font-size:16px;color:#31394D">
                 山西证券PRA平台
             </div>
             <div class="nav flex-column" style="background-color: #ffffff;">
@@ -76,15 +76,34 @@
                     <div>总耗时</div>
                     <div>实例状态</div>
                 </div>
-                <div v-for="(item, index) in tableData.data" :key="index" id="data" class="data flex-row" style="background:#ffffff;
-                border-radius: 6px;justify-content: space-between;">
-                  <div class="test">
-                      {{ item.name }}
+                <div v-for="(item, index) in tableData.data" :key="index" class="data flex-row" style="background:#ffffff;
+                border-radius: 6px;justify-content: space-between">
+                  <div>{{ item.id }}</div>
+                  <div>{{ item.name }}</div>
+                  <div>{{ item.resperson }}</div>
+                  <div>{{ item.time }}</div>
+                  <div>{{ item.spend }}</div>
+                  <div style="width:76px;height:28px;line-height:28px;text-align:center;background-color:#F65860;border-radius:6px">
+                      <p style="color:#F65860;">{{ item.sta }}</p>
                   </div>
                 </div>
-                <div class="data flex-row" style="background:#F5F6FA ;
+                <div class="page">
+                    <div class="block">
+                    
+                        <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-sizes="[100, 200, 300, 400]"
+                        :page-size="100"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="400">
+                        </el-pagination>
+                    </div>    
+                </div>
+                <!-- <div class="data flex-row" style="background:#F5F6FA ;
                 border-radius: 6px;justify-content: space-between;">
-                
+                    
                 </div>
                 <div class="data flex-row" style="background:#ffffff;
                 border-radius: 6px;justify-content: space-between;">
@@ -93,7 +112,7 @@
                 <div class="data flex-row" style="background:#F5F6FA ;
                 border-radius: 6px;justify-content: space-between;">
                     
-                </div>
+                </div> -->
             </div>
         </div>  
     </div>
@@ -103,10 +122,22 @@
 import axios from "axios";
 export default {
         name: "MissionOverview",
+        methods: {
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+            }
+            },       
         data() {
             return {
-                content:"hell0",
-                tableData:[]
+                tableData:[],
+                currentPage1: 5,
+                currentPage2: 5,
+                currentPage3: 5,
+                currentPage4: 4
+                
             }
         },
         mounted() {
