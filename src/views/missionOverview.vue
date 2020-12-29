@@ -161,17 +161,7 @@ export default {
         }
     }
 
-// export default {
-//     name: 'MissionOverview',
-//     data() {
-//         return {
-//             el : "#data",
-//             data : {
 
-//             }
-//         }
-//     }
-// }
 </script>
 <style>
 * {
