@@ -6,6 +6,9 @@ import router from './router'
 import ElementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+// 引入公共样式
+import './style/common.css'
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUi)
