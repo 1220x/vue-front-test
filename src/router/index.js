@@ -33,7 +33,17 @@ export default new Router({
     {
       path: '/home',
       name: 'Home',
-      component: Home
+      component: Home,
+      children: [
+        {
+          path: 'taskManagment',
+          component: TaskManagment
+        },
+        {
+          path: 'missionOverview',
+          component: MissionOverview
+        },
+      ]
     },
     {
       path: '/taskManagment',

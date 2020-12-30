@@ -5,40 +5,15 @@
                 <div class="home-title-icon"></div>
                 山西证券RPA平台
             </div>
-            <div :class="isActiveTab == 1 ? 'home-frame-left-item-border' : ''" class="home-frame-left-item flex-row">
-                <div @click="isActiveTab = 1" :class="isActiveTab == 1 ? 'home-frame-left-item-con-active': ''" class="home-frame-left-item-con flex-row">
-                    <div class="left-item-con-item"></div>
+            <div :class="isActiveTab == '1' ? 'home-frame-left-item-border' : ''" class="home-frame-left-item flex-row">
+                <div @click="tabChange(1)" :class="isActiveTab == 1 ? 'home-frame-left-item-con-active': ''" class="home-frame-left-item-con flex-row">
                     <div class="left-item-con-item">任务总览</div>
-                    <div class="left-item-con-item"></div>
                 </div>
             </div>
-            <div :class="isActiveTab == 2 ? 'home-frame-left-item-border' : ''" class="home-frame-left-item flex-row">
-                <div @click="isActiveTab = 2" :class="isActiveTab == 2 ? 'home-frame-left-item-con-active': ''"  class="home-frame-left-item-con flex-row">
-                    <div class="left-item-con-item"></div>
+            <div :class="isActiveTab == '2' ? 'home-frame-left-item-border' : ''" class="home-frame-left-item flex-row">
+                <div @click="tabChange(2)" :class="isActiveTab == 2 ? 'home-frame-left-item-con-active': ''"  class="home-frame-left-item-con flex-row">
                     <div class="left-item-con-item">任务管理</div>
-                    <div class="left-item-con-item"></div>
                 </div>
-            </div>
-            <div class="home-frame-left-item  flex-row">
-
-            </div>
-            <div class="home-frame-left-item flex-row">
-
-            </div>
-            <div class="home-frame-left-item flex-row">
-
-            </div>
-            <div class="home-frame-left-item flex-row">
-
-            </div>
-            <div class="home-frame-left-item flex-row">
-
-            </div>
-            <div class="home-frame-left-item flex-row">
-
-            </div>
-            <div class="home-frame-left-item flex-row">
-
             </div>
         </div>
         <div :style="image" class="home-frame-right flex-column">
@@ -100,6 +75,10 @@
                 </div>
             </div>
         </div>
+        
+        <!-- <div class="home-frame-right">
+            <router-view></router-view>
+        </div> -->
     </div>
 </template>
 
@@ -128,7 +107,14 @@ export default {
         }
     },
     methods: {
-
+        tabChange(val) {
+            this.isActiveTab = val;
+            if(val === 1) {
+                this.$router.push('/home/taskManagment');
+            } else if(val === 2) {
+                this.$router.push('/home/missionOverview');
+            }
+        }
     }
 }
 </script>
@@ -142,6 +128,7 @@ export default {
 
 .home-frame-left  {
     width: 206px;
+    height: 100%;
     flex: 0 0 206px;
     background-color: #ffffff;
 }
@@ -168,6 +155,7 @@ export default {
     margin-bottom: 15px;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .home-frame-left-item-border {
