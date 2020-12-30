@@ -1,12 +1,12 @@
 <template>
-        <div class="flex-row">
+    <div class="flex-row">
         <div class="left-content" style="width: 206px;">
-            <div class="left-top">
+            <div class="left-top" style="margin-top:27px">
                 山西证券PRA平台
             </div>
             <div class="nav flex-column" style="background-color: #ffffff;">
-                <div class="nav-item">任务总览<span>></span></div>
-                <div class="nav-item">任务管理<span>></span></div>
+                <div @click="gotoOverview" class="nav-item">任务总览<span>></span></div>
+                <div @click="gotoManagment" class="nav-item">任务管理<span>></span></div>
                 <div class="nav-item">视图管理<span>></span></div>
                 <div class="nav-item">实例管理<span>></span></div>
                 <div class="nav-item">脚本管理<span>></span></div>
@@ -163,12 +163,20 @@ export default {
                 }
                 return '';
             },
-                handleSizeChange(val) {
-                    console.log(`每页 ${val} 条`);
-                },
-                handleCurrentChange(val) {
-                    console.log(`当前页: ${val}`);
-                }
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+            },
+            gotoManagment() {
+                // this.$router.replace({name:'TaskManagment'});
+                //通过push进行跳转
+                this.$router.push('/taskmanagment')
+            },
+            gotoOverview() {
+                this.$router.push('/missionOverciew')
+            }
             },
         data() {
             // return {
