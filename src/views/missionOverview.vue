@@ -1,12 +1,12 @@
 <template>
-        <div class="flex-row">
+    <div class="flex-row">
         <div class="left-content" style="width: 206px;">
-            <div class="left-top" style="margin-top:27px;font-family:PingFangSC-Medium;font-size:16px;color:#31394D">
+            <div class="left-top" style="margin-top:27px">
                 山西证券PRA平台
             </div>
             <div class="nav flex-column" style="background-color: #ffffff;">
-                <div class="nav-item">任务总览<span>></span></div>
-                <div class="nav-item">任务管理<span>></span></div>
+                <div @click="gotoOverview" class="nav-item">任务总览<span>></span></div>
+                <div @click="gotoManagment" class="nav-item">任务管理<span>></span></div>
                 <div class="nav-item">视图管理<span>></span></div>
                 <div class="nav-item">实例管理<span>></span></div>
                 <div class="nav-item">脚本管理<span>></span></div>
@@ -67,7 +67,53 @@
                     <button type="button">待办任务</button>
                     <button type="button">已办任务</button>
                 </div>
-                <div class="data flex-row" style="background: rgba(64,114,238,0.10);
+                <div>
+                    <el-table
+                        :data="tableData"
+                        style="width: 100%"
+                        :row-class-name="tableRowClassName">
+                        <el-table-column
+                        prop="id"
+                        label="任务id"
+                        width="180">
+                        </el-table-column>
+                        <el-table-column
+                        prop="name"
+                        label="任务名称"
+                        width="180">
+                        </el-table-column>
+                        <el-table-column
+                        prop="resperson"
+                        label="责任人">
+                        </el-table-column>
+                        <el-table-column
+                        prop="time"
+                        label="开始时间">
+                        </el-table-column>
+                        <el-table-column
+                        prop="spend"
+                        label="总耗时">
+                        </el-table-column>
+                        <el-table-column
+                        prop="sta"
+                        label="实例状态">
+                        </el-table-column>
+                    </el-table>
+                </div>
+                <!-- 分页 -->
+                
+                <div class="block" style="margin-top:100px">
+                    <el-pagination
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="currentPage"
+                    :page-sizes="[100, 200, 300, 400]"
+                    :page-size="100"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="400">
+                    </el-pagination>
+                </div>
+                <!-- <div class="data flex-row" style="background: rgba(64,114,238,0.10);
                 border-radius: 6px;justify-content: space-between;">
                     <div>任务id</div>
                     <div>任务名称</div>
@@ -83,24 +129,10 @@
                   <div>{{ item.resperson }}</div>
                   <div>{{ item.time }}</div>
                   <div>{{ item.spend }}</div>
-                  <div style="width:76px;height:28px;line-height:28px;text-align:center;background-color:#F65860;border-radius:6px">
-                      <p style="color:#F65860;">{{ item.sta }}</p>
+                  <div style="width:76px;height:28px;line-height:28px;text-align:center;background-color:#F65860;opacity: 10%;border-radius:6px">
+                      {{ item.sta }}
                   </div>
-                </div>
-                <div class="page">
-                    <div class="block">
-                    
-                        <el-pagination
-                        @size-change="handleSizeChange"
-                        @current-change="handleCurrentChange"
-                        :current-page="currentPage"
-                        :page-sizes="[100, 200, 300, 400]"
-                        :page-size="100"
-                        layout="total, sizes, prev, pager, next, jumper"
-                        :total="400">
-                        </el-pagination>
-                    </div>    
-                </div>
+                </div> -->
                 <!-- <div class="data flex-row" style="background:#F5F6FA ;
                 border-radius: 6px;justify-content: space-between;">
                     
@@ -123,42 +155,87 @@ import axios from "axios";
 export default {
         name: "MissionOverview",
         methods: {
+            tableRowClassName({row, rowIndex}) {
+                if (rowIndex === 1) {
+                return 'warning-row';
+                } else if (rowIndex === 3) {
+                return 'success-row';
+                }
+                return '';
+            },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
             },
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
+            },
+            gotoManagment() {
+                // this.$router.replace({name:'TaskManagment'});
+                //通过push进行跳转
+                this.$router.push('/taskmanagment')
+            },
+            gotoOverview() {
+                this.$router.push('/missionOverciew')
             }
-            },       
+            },
         data() {
+            // return {
+            //     tableData:[]
+            // }
             return {
-                tableData:[],
-                currentPage1: 5,
-                currentPage2: 5,
-                currentPage3: 5,
-                currentPage4: 4
-                
-            }
+                    tableData: [{
+                    "id": "2020081717223001", 
+                    "name": "测试流程", 
+                    "resperson": "admin", 
+                    "time": "2020-08-18", 
+                    "spend": "1h20m30s", 
+                    "sta": "执行异常"
+                    }, {
+                    "id": "2020081717223002", 
+                    "name": "测试流程", 
+                    "resperson": "Harmen Porter", 
+                    "time": "2020-08-18", 
+                    "spend": "1h20m30s", 
+                    "sta": "执行异常"
+                    }, {
+                    
+                    "id": "2020081717223003", 
+                    "name": "测试流程", 
+                    "resperson": "admin", 
+                    "time": "2020-08-18", 
+                    "spend": "1h20m30s", 
+                    "sta": "执行异常"
+                    }, {
+                    "id": "2020081717223004", 
+                    "name": "测试流程", 
+                    "resperson": "Harmen Porter", 
+                    "time": "2020-08-18", 
+                    "spend": "1h20m30s", 
+                    "sta": "执行异常"
+                    }],
+                    
+                    currentPage: 4
+                }        
         },
         mounted() {
-            this.getData();
+            // this.getData();
         },
-        methods: {
-            getData() {
+        // methods: {
+        //     getData() {
 
-                axios.get('http://localhost:8080/static/test.json').then(response => {
+        //         axios.get('http://localhost:8080/static/test.json').then(response => {
                     
-                    console.log(response.data);
+        //             console.log(response.data);
 
-                    this.tableData = response.data;
+        //             this.tableData = response.data;
 
-                    console.log(this.tableData.data);
+        //             console.log(this.tableData.data);
 
-                }, response => {
-                    console.log("error");
-                });
-            }
-        }
+        //         }, response => {
+        //             console.log("error");
+        //         });
+        //     }
+        // }
     }
 
 
@@ -273,4 +350,12 @@ button {
     width: 1090px;
     height: 56px;
 }
+
+.el-table .warning-row {
+    background: oldlace;
+  }
+
+  .el-table .success-row {
+    background: #f0f9eb;
+  }
 </style>
