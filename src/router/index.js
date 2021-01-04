@@ -55,6 +55,7 @@ export default new Router({
       path: '/demo',
       name: 'Demo',
       component: Demo,
+      redirect: '/demo/missionOverview',
       children: [
         {
           path: 'missionOverview',
