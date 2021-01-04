@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/views/home'
 import MissionOverview from '@/views/missionOverview'
 import TaskManagment from '@/views/taskManagment'
+import Demo from '@/views/demo'
 
 Vue.use(Router)
 
@@ -23,7 +24,7 @@ export default new Router({
     {
       // 设置默认路由，打开项目时，默认展示任务总览
       path: '*',
-      redirect: '/missionOverview'
+      redirect: '/demo'
     },
     {
       path: '/missionOverview',
@@ -49,6 +50,21 @@ export default new Router({
       path: '/taskManagment',
       name: 'TaskManagment',
       component: TaskManagment
+    },
+    {
+      path: '/demo',
+      name: 'Demo',
+      component: Demo,
+      children: [
+        {
+          path: 'missionOverview',
+          component: MissionOverview
+        },
+        {
+          path: 'taskManagment',
+          component: TaskManagment
+        }
+      ]
     }
   ]
 })
