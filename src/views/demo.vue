@@ -7,56 +7,56 @@
             </div>
             <div :class="isActiveTab == '1' ? 'home-frame-left-item-border' : ''" class="home-frame-left-item flex-row">
                 <div @click="tabChange(1)" :class="isActiveTab == 1 ? 'home-frame-left-item-con-active': ''" class="home-frame-left-item-con flex-row">
-                    <div class="iconfont iconquanlingyuguimo"></div>
+                    <div class="iconfont iconquanlingyuguimo icon-mr"></div>
                     <div class="left-item-con-item" icon="el-icon-search">任务总览</div>
                     <div class="icon">></div>
                 </div>
             </div>
             <div :class="isActiveTab == '2' ? 'home-frame-left-item-border' : ''" class="home-frame-left-item flex-row">
                 <div @click="tabChange(2)" :class="isActiveTab == 2 ? 'home-frame-left-item-con-active': ''"  class="home-frame-left-item-con flex-row">
-                    <div class="iconfont iconfenzhi"></div>  
+                    <div class="iconfont iconfenzhi icon-mr"></div>  
                     <div class="left-item-con-item">任务管理</div>
                     <div class="icon">></div>
                 </div>
             </div>
             <div :class="isActiveTab == '3' ? 'home-frame-left-item-border' : ''" class="home-frame-left-item flex-row">
                 <div @click="tabChange(3)" :class="isActiveTab == 3 ? 'home-frame-left-item-con-active': ''"  class="home-frame-left-item-con flex-row">
-                    <div class="iconfont icontubiaozhutu"></div>  
+                    <div class="iconfont icontubiaozhutu icon-mr"></div>  
                     <div class="left-item-con-item">视图管理</div>
                     <div class="icon">></div>
                 </div>
             </div>
             <div :class="isActiveTab == '4' ? 'home-frame-left-item-border' : ''" class="home-frame-left-item flex-row">
                 <div @click="tabChange(4)" :class="isActiveTab == 4 ? 'home-frame-left-item-con-active': ''"  class="home-frame-left-item-con flex-row">
-                    <div class="iconfont iconyichulishixiang"></div>
+                    <div class="iconfont iconyichulishixiang icon-mr"></div>
                     <div class="left-item-con-item">实例管理</div>
                     <div class="icon">></div>
                 </div>
             </div>
             <div :class="isActiveTab == '5' ? 'home-frame-left-item-border' : ''" class="home-frame-left-item flex-row">
                 <div @click="tabChange(5)" :class="isActiveTab == 5 ? 'home-frame-left-item-con-active': ''"  class="home-frame-left-item-con flex-row">
-                    <div class="iconfont icondaibanshixiang"></div>
+                    <div class="iconfont icondaibanshixiang icon-mr"></div>
                     <div class="left-item-con-item">脚本管理</div>
                     <div class="icon">></div>
                 </div>
             </div>
             <div :class="isActiveTab == '6' ? 'home-frame-left-item-border' : ''" class="home-frame-left-item flex-row">
                 <div @click="tabChange(6)" :class="isActiveTab == 6 ? 'home-frame-left-item-con-active': ''"  class="home-frame-left-item-con flex-row">
-                    <div class="iconfont iconjiekoupeizhi"></div>
+                    <div class="iconfont iconjiekoupeizhi icon-mr"></div>
                     <div class="left-item-con-item">配置管理</div>
                     <div class="icon">></div>
                 </div>
             </div>
             <div :class="isActiveTab == '7' ? 'home-frame-left-item-border' : ''" class="home-frame-left-item flex-row">
                 <div @click="tabChange(7)" :class="isActiveTab == 7 ? 'home-frame-left-item-con-active': ''"  class="home-frame-left-item-con flex-row">
-                    <div class="iconfont iconyichulishixiang"></div>
+                    <div class="iconfont iconyichulishixiang icon-mr"></div>
                     <div class="left-item-con-item">系统设置</div>
                     <div class="icon">></div>
                 </div>
             </div>
             <div :class="isActiveTab == '8' ? 'home-frame-left-item-border' : ''" class="home-frame-left-item flex-row">
                 <div @click="tabChange(8)" :class="isActiveTab == 8 ? 'home-frame-left-item-con-active': ''"  class="home-frame-left-item-con flex-row">
-                    <div class="iconfont iconyichulishixiang"></div>
+                    <div class="iconfont iconyichulishixiang icon-mr"></div>
                     <div class="left-item-con-item">用户权限</div>
                     <div class="icon">></div>
                 </div>
@@ -126,8 +126,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+ 
 .home-frame {
     width: 100%;
     height: 100%;
@@ -305,10 +305,9 @@ export default {
     font-family: PingFangSC-Medium;
 }
 
-.iconfont {
+.icon-mr {
     color: #92929D;
     font-size: 14px;
-    position: relative;
-    right: 22.5px;
+    margin-right: 22.5px;
 }
 </style>

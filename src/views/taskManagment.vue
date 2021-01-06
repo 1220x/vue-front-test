@@ -75,7 +75,9 @@
                     <el-table-column 
                     label="使用状态"
                     show-overflow-tooltip>
-                    <template slot-scope="scope"><span class="addStyle">{{ scope.row.sta }}</span></template>
+                        <template slot-scope="scope">
+                            <span class="addStyle">{{ scope.row.sta }}</span>
+                        </template>
                     </el-table-column>
                 </el-table>
             </div>
@@ -92,10 +94,10 @@
                     <el-input v-model="form.name" :validate-event="false" autocomplete="off" placeholder="请输入"></el-input>
                 </el-form-item>
                 <el-form-item label="任务类型" :label-width="formLabelWidth" required>
-                <el-select v-model="form.region" placeholder="请选择活动区域">
-                    <el-option label="区域一" value="shanghai"></el-option>
-                    <el-option label="区域二" value="beijing"></el-option>
-                </el-select>
+                    <el-select v-model="form.region" placeholder="请选择活动区域">
+                        <el-option label="区域一" value="shanghai"></el-option>
+                        <el-option label="区域二" value="beijing"></el-option>
+                    </el-select>
                 </el-form-item>
             </el-form>
             <div slot="title" class="dialog-footer" style="height:56px;width:100%;background:rgba(64,114,238,0.10);border-radius: 12px 12px 0px 0px;">
@@ -232,18 +234,7 @@
     }
 }
 </script>
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    /* width: 100%; */
-}
-
-body {
-    background-color: #F5F6FA;
-    font-size: 14px;
-}
-
+<style scoped>
 .right-content {
     height: 900px;
     position: relative;
@@ -257,16 +248,14 @@ body {
 }
 
 .addStyle {
-    width: 76px;
-    height: 28px;
     background: #B558F6;
     border-radius: 6px;
+    padding: 5px 14px;
 }
 
-/* .icon {
-    color: #ff0000;
-    font-size: 14px;
-} */
+/deep/ .el-dialog {
+    border-radius: 10px;
+}
 
 el-form-item {
     display: flex;
