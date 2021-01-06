@@ -13,49 +13,44 @@
             <div class="home-frame-right-center">
                 <div class="center-content flex-row">
                     <div class="management flex-row">
-                    <div class="border" style="background-color: #4072EE;
-                    opacity: 10%;">
-                        <div class="iconfont iconyichulishixiang"></div>
+                        <div class="border flex-center" style="background-color: rgba(64,114,238,0.10);">
+                            <div class="iconfont iconyichulishixiang"></div>
+                        </div>
+                        <div>
+                            <div class="num">120</div>
+                            <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">调度任务总数</div> 
+                        </div>     
                     </div>
-                    <div style="position:relative;top:20px">
-                        <div class="num">120</div>
-                        <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">调度任务总数</div> 
-                    </div>     
-                </div>
-                <div class="management flex-row">
-                    <div class="border" style="background-color: #B558F6;
-                    opacity: 10%;">
-                        <div class="iconfont iconyichulishixiang"></div>
+                    <div class="management flex-row">
+                        <div class="border flex-center" style="background-color: rgba(181,88,246,0.10);">
+                            <div class="iconfont iconyichulishixiang"></div>
+                        </div>
+                        <div>
+                            <div class="num">300</div>
+                            <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">调度实例总数</div>
+                        </div>                 
                     </div>
-                    <div style="position:relative;top:20px">
-                        <div class="num">300</div>
-                        <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">调度实例总数</div>
-                    </div>                   
-                </div>
-                <div class="management flex-row">
-                    <div class="iconfont icondingdan border" style="background-color: #FEC400;
-                    opacity: 10%;"></div>
-                    <div style="position:relative;top:20px">
-                        <div class="num">35</div>
-                        <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">执行中实例数</div>
-                    </div>                   
-                </div>
-                <div class="management flex-row">
-                    <div class="border" style="background-color: #29CB97;
-                    opacity: 10%;"></div>
-                    <div style="position:relative;top:20px">
-                        <div class="num">360</div>
-                        <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">执行完成实例数</div>
-                    </div>                  
-                </div>
-                <div class="management flex-row">
-                    <div class="border" style="background-color: #F65860;
-                    opacity: 10%;"></div>
-                    <div style="position:relative;top:20px">
-                        <div class="num">5</div>
-                        <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">执行异常实例数</div>
+                    <div class="management flex-row">
+                        <div class="iconfont icondingdan border flex-center" style="background-color: rgba(254,196,0,0.10);"></div>
+                        <div>
+                            <div class="num">35</div>
+                            <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">执行中实例数</div>
+                        </div>                   
                     </div>
-                </div>
+                    <div class="management flex-row">
+                        <div class="border flex-center" style="background-color:  rgba(41,203,151,0.10);"></div>
+                        <div>
+                            <div class="num">360</div>
+                            <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">执行完成实例数</div>
+                        </div>                  
+                    </div>
+                    <div class="management flex-row">
+                        <div class="border flex-center" style="background-color:  rgba(246,88,96,0.10);"></div>
+                        <div>
+                            <div class="num">5</div>
+                            <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">执行异常实例数</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="home-frame-right-bottom">
@@ -97,6 +92,10 @@
                             <el-table-column
                             prop="sta"
                             label="实例状态">
+                                <template slot-scope="scope">
+                                    <span v-if="scope.row.sta === '执行完成'" class="status-box status-complete">{{ scope.row.sta }}</span>
+                                    <span v-if="scope.row.sta === '执行异常'" class="status-box status-error">{{ scope.row.sta }}</span>
+                                </template>
                             </el-table-column>
                         </el-table>
                     </div>
@@ -104,16 +103,7 @@
             </div>
         </div>
 </template>
-<style>
-    .home-frame-right {
-        height: 100%;
-    }
 
-    .iconfont {
-        text-align: center;
-        font-size: 20px;
-    }
-</style>
 <script>
 export default {
     name: 'Demo',
@@ -135,7 +125,7 @@ export default {
                     "resperson": "Harmen Porter", 
                     "time": "2020-08-18", 
                     "spend": "1h20m30s", 
-                    "sta": "执行异常"
+                    "sta": "执行完成"
                     }, {
                     "id": "2020081717223003", 
                     "name": "测试流程", 
@@ -149,7 +139,7 @@ export default {
                     "resperson": "Harmen Porter", 
                     "time": "2020-08-18", 
                     "spend": "1h20m30s", 
-                    "sta": "执行异常"
+                    "sta": "执行完成"
                     }],
             pagger: {
                 size: 10,
@@ -162,3 +152,60 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.home-frame-right {
+    height: 100%;
+}
+
+.iconfont {
+    text-align: center;
+    font-size: 20px;
+}
+
+.iconyichulishixiang {
+    color: #297dea;
+}
+
+.management {
+    align-items: center;
+    margin-right: 30px;
+}
+
+.management::after {
+    content: "";
+    height: 40px;
+    width: 2px;
+    background-color: #EBEDF4;
+    margin-left: 20px;
+}
+
+.border {
+    width: 60px;
+    height: 60px;
+    margin-right: 16px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.center-content {
+    padding-left: 30px;
+    padding-right: 30px;
+    justify-content: space-between;
+}
+
+.status-box {
+    padding: 5px 14px;
+    border-radius: 6px;
+}
+
+.status-complete {
+    background-color: rgba(41,203,151,0.10);
+    color:  #29CB97;
+}
+
+.status-error {
+    background-color: rgba(246,88,96,0.10);
+    color: #F65860;
+}
+</style>
