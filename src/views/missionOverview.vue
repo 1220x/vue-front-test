@@ -14,24 +14,28 @@
                 <div class="center-content flex-row">
                     <div class="management flex-row">
                     <div class="border" style="background-color: #4072EE;
-                    opacity: 10%;"></div>
-                    <div>
+                    opacity: 10%;">
+                        <div class="iconfont iconyichulishixiang"></div>
+                    </div>
+                    <div style="position:relative;top:20px">
                         <div class="num">120</div>
                         <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">调度任务总数</div> 
                     </div>     
                 </div>
                 <div class="management flex-row">
                     <div class="border" style="background-color: #B558F6;
-                    opacity: 10%;"></div>
-                    <div>
+                    opacity: 10%;">
+                        <div class="iconfont iconyichulishixiang"></div>
+                    </div>
+                    <div style="position:relative;top:20px">
                         <div class="num">300</div>
                         <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">调度实例总数</div>
                     </div>                   
                 </div>
                 <div class="management flex-row">
-                    <div class="border" style="background-color: #FEC400;
+                    <div class="iconfont icondingdan border" style="background-color: #FEC400;
                     opacity: 10%;"></div>
-                    <div>
+                    <div style="position:relative;top:20px">
                         <div class="num">35</div>
                         <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">执行中实例数</div>
                     </div>                   
@@ -39,7 +43,7 @@
                 <div class="management flex-row">
                     <div class="border" style="background-color: #29CB97;
                     opacity: 10%;"></div>
-                    <div>
+                    <div style="position:relative;top:20px">
                         <div class="num">360</div>
                         <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">执行完成实例数</div>
                     </div>                  
@@ -47,7 +51,7 @@
                 <div class="management flex-row">
                     <div class="border" style="background-color: #F65860;
                     opacity: 10%;"></div>
-                    <div>
+                    <div style="position:relative;top:20px">
                         <div class="num">5</div>
                         <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">执行异常实例数</div>
                     </div>
@@ -100,6 +104,16 @@
             </div>
         </div>
 </template>
+<style>
+    .home-frame-right {
+        height: 100%;
+    }
+
+    .iconfont {
+        text-align: center;
+        font-size: 20px;
+    }
+</style>
 <script>
 export default {
     name: 'Demo',
