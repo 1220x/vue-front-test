@@ -83,11 +83,13 @@
         <el-dialog
             title="新建任务"
             :visible.sync="dialogFormVisible"
+            class="dialog-small"
             width="50%"
+            center
             @close="addDialogClosed">
             <el-form :model="form" >
                 <el-form-item label="任务名称" :label-width="formLabelWidth" required>
-                <el-input v-model="form.name" :validate-event="false" autocomplete="off" placeholder="请输入"></el-input>
+                    <el-input v-model="form.name" :validate-event="false" autocomplete="off" placeholder="请输入"></el-input>
                 </el-form-item>
                 <el-form-item label="任务类型" :label-width="formLabelWidth" required>
                 <el-select v-model="form.region" placeholder="请选择活动区域">
@@ -96,10 +98,15 @@
                 </el-select>
                 </el-form-item>
             </el-form>
-            <div slot="footer" class="dialog-footer">
+            <div slot="title" class="dialog-footer" style="height:56px;width:100%;background:rgba(64,114,238,0.10);border-radius: 12px 12px 0px 0px;">
+                <span>这是标题</span>
+                <span>这是一段信息</span>
+            </div>
+
+            <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
                 <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
-            </div>
+            </span>
         </el-dialog>
     </div>
 </template>
@@ -260,4 +267,9 @@ body {
     color: #ff0000;
     font-size: 14px;
 } */
+
+el-form-item {
+    display: flex;
+    flex-direction: column;
+}
 </style>
