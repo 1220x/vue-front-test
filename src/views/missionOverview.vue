@@ -31,21 +31,27 @@
                         </div>                 
                     </div>
                     <div class="management flex-row">
-                        <div class="iconfont icondingdan border flex-center" style="background-color: rgba(254,196,0,0.10);"></div>
+                        <div class="border flex-center" style="background-color: rgba(254,196,0,0.10);">
+                            <div class="iconfont icondingdan "></div>
+                        </div>
                         <div>
                             <div class="num">35</div>
                             <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">执行中实例数</div>
                         </div>                   
                     </div>
                     <div class="management flex-row">
-                        <div class="border flex-center" style="background-color:  rgba(41,203,151,0.10);"></div>
+                        <div class="border flex-center" style="background-color:  rgba(41,203,151,0.10);">
+                            <div class="iconfont icondingdan "></div>
+                        </div>
                         <div>
                             <div class="num">360</div>
                             <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">执行完成实例数</div>
                         </div>                  
                     </div>
                     <div class="management flex-row">
-                        <div class="border flex-center" style="background-color:  rgba(246,88,96,0.10);"></div>
+                        <div class="border flex-center" style="background-color:  rgba(246,88,96,0.10);">
+                            <div class="iconfont icondingdan "></div>
+                        </div>
                         <div>
                             <div class="num">5</div>
                             <div style="font-family: PingFangSC-Medium;color: #748AA1;font-size: 14px;">执行异常实例数</div>

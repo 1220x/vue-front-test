@@ -120,6 +120,8 @@ export default {
                 this.$router.push('/demo/missionOverview');
             } else if(val === 2) {
                 this.$router.push('/demo/taskManagment');
+            } else if(val === 4) {
+                this.$router.push('/demo/exampleManagment');
             }
         }
     }

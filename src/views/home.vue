@@ -1,278 +1,222 @@
 <template>
-    <div class="home-frame flex-row">
-        <div class="home-frame-left flex-column">
-            <div class="home-frame-left-title flex-row common-red">
-                <div class="home-title-icon"></div>
-                山西证券RPA平台
-            </div>
-            <div :class="isActiveTab == '1' ? 'home-frame-left-item-border' : ''" class="home-frame-left-item flex-row">
-                <div @click="tabChange(1)" :class="isActiveTab == 1 ? 'home-frame-left-item-con-active': ''" class="home-frame-left-item-con flex-row">
-                    <div class="left-item-con-item">任务总览</div>
-                </div>
-            </div>
-            <div :class="isActiveTab == '2' ? 'home-frame-left-item-border' : ''" class="home-frame-left-item flex-row">
-                <div @click="tabChange(2)" :class="isActiveTab == 2 ? 'home-frame-left-item-con-active': ''"  class="home-frame-left-item-con flex-row">
-                    <div class="left-item-con-item">任务管理</div>
-                </div>
-            </div>
-        </div>
-        <div :style="image" class="home-frame-right flex-column">
-            <div class="home-frame-right-top flex-row">
-                <div class="top-left flex-row">
-                    <div class="top-left-icon"></div>
-                    <div class="top-left-text">总览</div>
-                </div>
-                <div class="top-right flex-row">
-                    <div class="top-right-text">欢迎你admin</div>
-                    <div class="top-right-icon"></div>
-                </div>
-            </div>
-            <div class="home-frame-right-center">
-                <div class="center-content">
-
-                </div>
-            </div>
-            <div class="home-frame-right-bottom">
-                <div class="bottom-centent flex-column">
-                    <div class="bottom-content-title">待办已办</div>
-                    <div class="bottom-content-btn-box flex-row">
-                        <el-button type="plain"  class="btn-unhandle">待办任务</el-button>
-                        <el-button class="btn-handle">已办任务</el-button>
-                    </div>
-                    <div class="bottom-content-table flex-column">
-                        <el-table
-                            stripe
-                            style="width: 100%"
-                            :data="tableData"
-                            :pagger="pagger"
-                            >
-                            <el-table-column
-                                prop="ID"
-                                label="任务ID">
-                            </el-table-column>
-                            <el-table-column
-                                prop="name"
-                                label="任务名称">
-
-                            </el-table-column>
-                            <el-table-column
-                                prop="person"
-                                label="责任人">
-
-                            </el-table-column>
-                            <el-table-column
-                                prop="time"
-                                label="处理时间">
-
-                            </el-table-column>
-                            <el-table-column
-                                prop="status"
-                                label="实例状态">
-
-                            </el-table-column>
-                        </el-table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- <div class="home-frame-right">
-            <router-view></router-view>
-        </div> -->
-    </div>
+  <div class="wrap">
+      <el-table :data="tableData" border stripe style="width: 100%">
+        ref="multipleTable"
+                :data="tableData"
+                tooltip-effect="dark"
+                style="width: 100%"
+                @selection-change="handleSelectionChange">
+                    <el-table-column
+                    type="selection"
+                    width="55">
+                    </el-table-column>
+                    <el-table-column
+                    prop="id"
+                    label="任务id"
+                    width="120">
+                    </el-table-column>
+                    <el-table-column
+                    prop="name"
+                    label="任务名称"
+                    width="120">
+                    </el-table-column>
+                    <el-table-column
+                    prop="resperson"
+                    label="责任人"
+                    width="120">
+                    </el-table-column>
+                    <el-table-column
+                    prop="start"
+                    label="开始时间"
+                    width="120">
+                    </el-table-column>
+                    <el-table-column
+                    prop="over"
+                    label="结束时间"
+                    width="120">
+                    </el-table-column>
+                    <el-table-column
+                    prop="alltime"
+                    label="总耗时"
+                    width="120">
+                    </el-table-column>
+                    <el-table-column
+                    prop="repeat"
+                    label="重复次数"
+                    width="120">
+                    </el-table-column>
+                    <el-table-column
+                    prop="sta"
+                    label="实例状态"
+                    width="120">
+                        <!-- <template slot-scope="scope">
+                            <span v-if="scope.row.sta === '冻结'" class="status-box status-frozen">{{ scope.row.sta }}</span>
+                            <span v-if="scope.row.sta === '未执行'" class="status-box status-error">{{ scope.row.sta }}</span>
+                            <span v-if="scope.row.sta === '执行中'" class="status-box status-doing">{{ scope.row.sta }}</span>
+                            <span class="addStyle">{{ scope.row.sta }}</span>
+                        </template> -->
+                        <template slot-scope="scope">
+                            <span v-if="scope.row.sta === '执行完成'" class="status-box status-complete">{{ scope.row.sta }}</span>
+                            <span v-if="scope.row.sta === '未执行'" class="status-box status-doing">{{ scope.row.sta }}</span>
+                            <span v-if="scope.row.sta === '执行异常'" class="status-box status-error">{{ scope.row.sta }}</span>
+                        </template>
+                    </el-table-column>
+      </el-table>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="query.pageNum"
+        :page-sizes="[2, 3, 4, 5]"
+        :page-size="query.pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="query.total"
+      ></el-pagination>
+  </div>
 </template>
-
 <script>
 export default {
-    name: 'home',
-    data() {
-        return {
-            test: '主页--测试',
-            image:{
-                backgroundImage: "url(" + require("../assets/bg-image.jpg") + ")"
-            },
-            tableData: [
-                { ID: '1', name: '任务1', person: 'Lisa', time: '2020/12/12', status: '执行完成' },
-                { ID: '2', name: '任务2', person: 'Tom', time: '2020/12/12', status: '执行完成' },
-                { ID: '3', name: '任务3', person: 'lisa', time: '2020/12/12', status: '未完成' },
-                { ID: '4', name: '任务4', person: 'Jessic', time: '2020/12/12', status: '执行完成' },
-                { ID: '5', name: '任务5', person: 'lisa', time: '2020/12/12', status: '执行完成' },
-            ],
-            pagger: {
-                size: 10,
-                current: 1
-            },
-            isActiveTab: 1
-
-        }
+  data() {
+    return {
+      //table 表数据
+      tableData: [],
+      //分页数据
+      query: {
+        pageNum: 1,
+        pageSize: 3,
+        total: 0
+      }
+    };
+  },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      //table总数据
+      const DataAll = [{
+                id: "2020081717223001",
+                name: "测试流程",
+                resperson: "admin",
+                start: "2020/09/09  14:50",
+                over: "2020/09/09  14:50",
+                alltime: "1m23s",
+                repeat: "3/5",
+                sta: "执行完成"
+            },{
+                id: "2020081717223001",
+                name: "测试流程",
+                resperson: "admin",
+                start: "2020/09/09  14:50",
+                over: "2020/09/09  14:50",
+                alltime: "1m23s",
+                repeat: "3/5",
+                sta: "执行异常"
+            },{
+                id: "2020081717223001",
+                name: "测试流程",
+                resperson: "admin",
+                start: "2020/09/09  14:50",
+                over: "2020/09/09  14:50",
+                alltime: "1m23s",
+                repeat: "3/5",
+                sta: "未执行"
+            },{
+                id: "2020081717223001",
+                name: "测试流程",
+                resperson: "admin",
+                start: "2020/09/09  14:50",
+                over: "2020/09/09  14:50",
+                alltime: "1m23s",
+                repeat: "3/5",
+                sta: "执行完成"
+            },{
+                id: "2020081717223001",
+                name: "测试流程",
+                resperson: "admin",
+                start: "2020/09/09  14:50",
+                over: "2020/09/09  14:50",
+                alltime: "1m23s",
+                repeat: "3/5",
+                sta: "执行异常"
+            },{
+                id: "2020081717223001",
+                name: "测试流程",
+                resperson: "admin",
+                start: "2020/09/09  14:50",
+                over: "2020/09/09  14:50",
+                alltime: "1m23s",
+                repeat: "3/5",
+                sta: "未执行"
+            },{
+                id: "2020081717223001",
+                name: "测试流程",
+                resperson: "admin",
+                start: "2020/09/09  14:50",
+                over: "2020/09/09  14:50",
+                alltime: "1m23s",
+                repeat: "3/5",
+                sta: "执行完成"
+            },{
+                id: "2020081717223001",
+                name: "测试流程",
+                resperson: "admin",
+                start: "2020/09/09  14:50",
+                over: "2020/09/09  14:50",
+                alltime: "1m23s",
+                repeat: "3/5",
+                sta: "未执行"
+            }];
+            
+      //每次执行方法，将展示的数据清空
+      this.tableData=[]
+      //第一步：当前页的第一条数据在总数据中的位置
+      let strlength = (this.query.pageNum - 1) * this.query.pageSize + 1;
+      //第二步：当前页的最后一条数据在总数据中的位置
+      let endlength = this.query.pageNum * this.query.pageSize;
+      //第三步：此判断很重要，执行时机：当分页的页数在最后一页时，进行重新筛选获取数据时
+      //获取本次表格最后一页第一条数据所在的位置的长度
+	  let resStrLength=0
+      if(DataAll.length % this.query.pageSize == 0){
+        resStrLength = (parseInt(DataAll.length / this.query.pageSize)-1) * this.query.pageSize + 1
+      }else{
+        resStrLength = parseInt(DataAll.length / this.query.pageSize) * this.query.pageSize + 1
+      }
+      //如果上一次表格的最后一页第一条数据所在的位置的长度 大于 本次表格最后一页第一条数据所在的位置的长度，则将本次表格的最后一页第一条数据所在的位置的长度 为最后长度
+      if(strlength>resStrLength){
+        strlength=resStrLength
+      }
+      //第四步：此判断很重要，当分页的页数切换至最后一页，如果最后一页获取到的数据长度不足最后一页设置的长度，则将设置的长度 以 获取到的数据长度 为最后长度
+      if (endlength > DataAll.length) {
+        endlength = DataAll.length;
+      }
+      //第五步：循环获取当前页数的数据，放入展示的数组中
+      for (let i = strlength - 1; i < endlength; i++) {
+        this.tableData.push(DataAll[i]);
+      }
+      //数据的总条数
+      this.query.total = DataAll.length;
     },
-    methods: {
-        tabChange(val) {
-            this.isActiveTab = val;
-            if(val === 1) {
-                this.$router.push('/home/taskManagment');
-            } else if(val === 2) {
-                this.$router.push('/home/missionOverview');
-            }
-        }
+    //切换当前页显示的数据条数，执行方法
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.query.pageSize=val
+      this.getData()
+    },
+    //切换页数，执行方法
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.query.pageNum=val
+      this.getData()
     }
-}
+  }
+};
 </script>
-
-<style>
-
-.home-frame {
-    width: 100%;
-    height: 100%;
+<style scoped>
+.wrap {
+  width: 100%;
+  height: 100%;
 }
-
-.home-frame-left  {
-    width: 206px;
-    height: 100%;
-    flex: 0 0 206px;
-    background-color: #ffffff;
+.el-pagination {
+  margin-top: 15px;
 }
-
-.home-frame-left-title {
-    height: 60px;
-    font-size: 16px;
-    color: #31394d;
-    align-items: center;
-    justify-content: center;
-}
-
-.home-title-icon{
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 1px solid #4072ee;
-    margin-right: 10px;
-}
-
-.home-frame-left-item {
-    width: 100%;
-    height: 48px;
-    margin-bottom: 15px;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-.home-frame-left-item-border {
-    border-right: 4px solid #4072ee;
-}
-
-.home-frame-left-item-con {
-    width: 172px;
-    height: 100%;
-    border-radius: 4px;
-    color: #31394d;
-    justify-content: center;
-    align-items: center;
-}
-
-.home-frame-left-item-con-active {
-    background-color: #4072ee;
-    color: #ffffff;
-}
-
-.home-frame-right {
-    flex: 1 1;
-    height: 100%;
-    display: flex;
-    box-sizing: border-box;
-    flex-direction: column;
-    background-repeat: no-repeat;
-    background-size: 100% 240px;
-    margin-left: 5px;
-    background-color: #f5f6fa;
-}
-
-.home-frame-right-top {
-    height: 56px;
-    flex: 0 0 56px; 
-    position: relative;
-    width: 100%;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 20px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-}
-
-.top-left {
-    width: 200px;
-    align-items: center;
-}
-
-.top-left-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 6px;
-    background-color: rgba(245, 246, 250, 0.4);
-    margin-right: 16px;
-}
-
-.top-left-text{
-    font-size: 20px;
-    color: #ffffff;
-}
-
-.top-right {
-    align-items: center;
-}
-
-.top-right-text {
-    font-size: 14px;
-    color: #ffffff;
-}
-
-.top-right-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 6px;
-    margin-left: 16px;
-    background-color: rgba(255, 255, 255, 0.8);
-}
-
-.home-frame-right-center {
-    width: 100%;
-    height: 144px;
-    padding-left: 40px;
-    padding-right: 40px;
-    box-sizing: border-box;
-    margin-top: 90px;
-}
-
-.center-content {
-    height: 100%;
-    border-radius: 12px;
-    background-color: #ffffff;
-}
-
-.home-frame-right-bottom {
-    width: 100%;
-    padding-left: 40px;
-    padding-right: 40px;
-    box-sizing: border-box;
-    margin-top: 32px;
-}
-
-.bottom-centent {
-    border-radius: 12px;
-    background-color: #ffffff;
-    padding: 25px 32px;
-}
-
-.bottom-content-btn-box {
-    margin-top: 24px;
-    margin-bottom: 24px;
-}
-
-.btn-unhandle {
-    margin-left: 5px;
-    margin-right: 8px;
-}
-
 </style>

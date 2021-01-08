@@ -74,9 +74,13 @@
                     </el-table-column>
                     <el-table-column 
                     label="使用状态"
+                    prop="sta"
                     show-overflow-tooltip>
                         <template slot-scope="scope">
-                            <span class="addStyle">{{ scope.row.sta }}</span>
+                            <span v-if="scope.row.sta === '冻结'" class="status-box status-frozen">{{ scope.row.sta }}</span>
+                            <span v-if="scope.row.sta === '未执行'" class="status-box status-error">{{ scope.row.sta }}</span>
+                            <span v-if="scope.row.sta === '执行中'" class="status-box status-doing">{{ scope.row.sta }}</span>
+                            <!-- <span class="addStyle">{{ scope.row.sta }}</span> -->
                         </template>
                     </el-table-column>
                 </el-table>
@@ -100,10 +104,6 @@
                     </el-select>
                 </el-form-item>
             </el-form>
-            <div slot="title" class="dialog-footer" style="height:56px;width:100%;background:rgba(64,114,238,0.10);border-radius: 12px 12px 0px 0px;">
-                <span>这是标题</span>
-                <span>这是一段信息</span>
-            </div>
 
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -114,15 +114,16 @@
 </template>
 <script>
   export default {
-    methods: { 
-        handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
-    }     
-},
+    
+//     methods: { 
+//         handleClose(done) {
+//         this.$confirm('确认关闭？')
+//           .then(_ => {
+//             done();
+//           })
+//           .catch(_ => {});
+//     }     
+// },
     data() {
       return {
           tableData:[{
@@ -144,7 +145,17 @@
               node: "10.253.46.140",
               time: "每天：00：30",
               resperson: "小王",
-              sta: "未执行"
+              sta: "冻结"
+          },{
+              id: "2020081717223001",
+              name: "测试流程",
+              type: "RPA",
+              depend: "否",
+              foot: "脚本名称",
+              node: "10.253.46.140",
+              time: "每天：00：30",
+              resperson: "小王",
+              sta: "执行中"
           },{
               id: "2020081717223001",
               name: "测试流程",
@@ -164,7 +175,7 @@
               node: "10.253.46.140",
               time: "每天：00：30",
               resperson: "小王",
-              sta: "未执行"
+              sta: "冻结"
           },{
               id: "2020081717223001",
               name: "测试流程",
@@ -184,7 +195,7 @@
               node: "10.253.46.140",
               time: "每天：00：30",
               resperson: "小王",
-              sta: "未执行"
+              sta: "执行中"
           },{
               id: "2020081717223001",
               name: "测试流程",
@@ -204,17 +215,7 @@
               node: "10.253.46.140",
               time: "每天：00：30",
               resperson: "小王",
-              sta: "未执行"
-          },{
-              id: "2020081717223001",
-              name: "测试流程",
-              type: "RPA",
-              depend: "否",
-              foot: "脚本名称",
-              node: "10.253.46.140",
-              time: "每天：00：30",
-              resperson: "小王",
-              sta: "未执行"
+              sta: "执行中"
           }],
           multipleSelection: [],
           dialogFormVisible: false,
@@ -247,18 +248,37 @@
     border-radius: 12px;
 }
 
-.addStyle {
+.status-box {
+    /* width: 76px;
+    height: 28px; */
+    border-radius: 10px;
+}
+
+.status-frozen {
+    padding: 5px 20px;
+    background: rgba(246,88,96,0.10);
+}
+
+.status-error {
+    background: rgba(181,88,246,0.10);
+    padding: 5px 15px;
+}
+
+.status-doing {
+    background: rgba(254,196,0,0.10);
+    padding: 5px 14px;
+
+}
+
+/* .addStyle {
     background: #B558F6;
     border-radius: 6px;
     padding: 5px 14px;
-}
+} */
 
 /deep/ .el-dialog {
     border-radius: 10px;
 }
 
-el-form-item {
-    display: flex;
-    flex-direction: column;
-}
+
 </style>

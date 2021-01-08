@@ -4,6 +4,7 @@ import Home from '@/views/home'
 import MissionOverview from '@/views/missionOverview'
 import TaskManagment from '@/views/taskManagment'
 import Demo from '@/views/demo'
+import ExampleManagment   from '@/views/exampleManagment'
 
 Vue.use(Router)
 
@@ -64,6 +65,10 @@ export default new Router({
         {
           path: 'taskManagment',
           component: TaskManagment
+        },
+        {
+          path: 'exampleManagment',
+          component: ExampleManagment
         }
       ]
     }
